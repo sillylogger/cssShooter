@@ -3,30 +3,3 @@
   %input{ id:  'selector', name: 'selector', placeholder: '#css.selector' }
 
 %pre
-
-#course
-  %p Tee
-  %p Fairway
-  %p Fairway
-  %p Fairway
-  %p Sandtrap
-  %p
-    %span leaf
-    Green
-    %span hole
-
-:javascript
-  var course = $('#course').hide();        
-  var hole = $('span', course).last().data('hole', true);
-
-  $('pre').text( course.html() );
-
-  $('form').submit(function(){
-    var selector = $('input#selector').val();
-    if( $(selector).data('hole') ) {
-      alert("Hole in one!");
-    } else {
-      alert("Slice!")
-    }
-    return false;
-  });

@@ -2,7 +2,7 @@
 %html{:dir => "ltr", :lang => "en-US"}
   %head
     %meta{:charset => "utf-8"}
-    %title Css Golf
+    %title css Shooter!
     
     / %link{:href => "http://fonts.googleapis.com/css?family=Quattrocento", :rel => "stylesheet", :type => "text/css"}
     / :css
@@ -18,11 +18,17 @@
     
     %script{:src => "/javascripts/application.js"}
     
+    %script{:src => "/javascripts/models/target.js"}
+    %script{:src => "/javascripts/views/target_view.js"}
+    
   %body
   
     #container
 
       %header
-        %h1 Css Golf
+        %h1 css Shooter!
         
-      = yield
+      %article= yield
+
+      :javascript
+        Application.initialize();

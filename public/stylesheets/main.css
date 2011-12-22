@@ -1,0 +1,13 @@
+@import url("reset.css");
+body {
+  font-family: "Helvetica Neue";
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: lighter; }
+
+#container {
+  width: 595px;
+  margin: 35px auto 65px;
+  padding: 0; }
+  #container > header {
+    margin-bottom: 2em; }

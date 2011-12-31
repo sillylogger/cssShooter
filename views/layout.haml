@@ -28,6 +28,22 @@
 
       %header
         %h1 css Shooter!
+        %a{ href: "#" } help
+        %dl{ style: "display: none;" }
+          %dt{ level: 2 } *
+          %dd any element
+
+          %dt{ level: 1 } E
+          %dd an element of type E
+
+          %dt{ level: 2 } E[foo]
+          %dd an E element with a "foo" attribute
+
+          %dt{ level: 2 } E[foo="bar"]
+          %dd an E element whose "foo" attribute value is exactly equal to "bar"
+
+          %dt{ level: 2 } E[foo~="bar"]
+          %dd an E element whose "foo" attribute value is a list of whitespace-separated values, one of which is exactly equal to "bar"
         
       %nav
         

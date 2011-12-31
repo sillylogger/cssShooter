@@ -48,12 +48,28 @@ SampleData = {
 
 Application = {
   
+  header: 'header',
   nav: 'nav',
     
 	initialize: function(){
-	  var nav = $(this.nav);
+	  this._setupHelp();
 
     var rangeView = new views.RangeView({ el: $('article') });
+    this._setupLevels(rangeView);
+	},
+	
+	_setupHelp: function(){
+	  var header = $(this.header);
+	  var link = $('a:contains("help")', header);
+	  var dl = $('dl', header);
+	  
+	  link.bind('click', function(){
+	    dl.toggle();
+	  });
+	},
+	
+	_setupLevels: function(rangeView){
+	  var nav = $(this.nav);
 	  
 	  _.each( SampleData.Target.all, function(target, index) {
 	    var link = $('<a href="#">').data('target_id', index).text('Level ' + index);
@@ -67,7 +83,6 @@ Application = {
 	    rangeView.render();
 	    return false;
 	  });
-	  
 	}
 
 };

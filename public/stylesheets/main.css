@@ -18,6 +18,18 @@ pre {
   width: 595px;
   margin: 35px auto 65px;
   padding: 0; }
+  #container > header {
+    position: relative; }
+    #container > header dl {
+      position: absolute;
+      border: 1px solid #666666;
+      width: 30em;
+      right: -30em; }
+      #container > header dl dt {
+        display: block; }
+      #container > header dl dd {
+        text-indent: 2em;
+        margin-bottom: 1em; }
   #container > nav {
     margin-bottom: 1em; }
     #container > nav a {

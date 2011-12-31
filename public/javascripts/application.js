@@ -5,6 +5,33 @@ SampleData = {
   Target: {
     all: [{
       domScape: '\
+<p data-target="true">Zombie</p>\n\
+<div data-target="true">Bad Guy</div>\n\
+<p data-target="true">Evil Doer</p>',
+      solution: '*'
+    },{
+      domScape: '\
+<p data-target="true">Zombie</p>\n\
+<div>Innocent Bystander</div>\n\
+<p data-target="true">Evil Doer</p>',
+      solution: 'p'
+    },{
+        domScape: '\
+<p>Lowly henchman</p>\n\
+<div>Innocent Bystander</div>\n\
+<p boss="true" data-target="true">Mr. Big Time Bad Guy</p>',
+        note: 'Just go for the big guy',
+        solution: 'p[boss=true]'
+    },{
+        domScape: '\
+<a>Just a link</a>\n\
+<p data-target="true">Bad Guy</p>\n\
+<p data-target="true">Bad Guy</p>\n\
+<a>Another link</a>\n\
+<p>Innocent Bystander</p>',
+        solution: 'p:not(p:last-child)'
+    },{
+      domScape: '\
 <p>Bystander</p>\n\
 <p>Innocent Bystander</p>\n\
 <p>Bystander</p>\n\
@@ -13,7 +40,9 @@ SampleData = {
   <span data-target="true">Zombie (the target)</span>\n\
 </p>',
       solution: 'p span:last-of-type'
-    }]
+    },
+    
+    ]
   }
 };
 

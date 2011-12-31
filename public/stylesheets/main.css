@@ -20,6 +20,9 @@ pre {
   padding: 0; }
   #container > nav {
     margin-bottom: 1em; }
+    #container > nav a {
+      display: inline-block;
+      margin-right: 1em; }
   #container form {
     margin-bottom: 1em; }
     #container form input {

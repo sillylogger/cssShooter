@@ -3,9 +3,10 @@ require('/javascripts/underscore.js');
 require('/javascripts/backbone.js');
 require('/javascripts/application.js');
 require('/javascripts/models/target.js');
+require('/javascripts/views/range_view.js');
 require('/javascripts/views/target_view.js');
 
-describe('Target', function(){
+describe('TargetView', function(){
   
   var view, model;
     
@@ -19,7 +20,7 @@ describe('Target', function(){
       view.render();
       var text = $(view.el).html(); 
       expect( text ).toContain('Bystander');
-      expect( text ).toContain('Target');
+      expect( text ).toContain('target');
     });
     
     it('strips the "data-target" attribute off', function(){

@@ -1,7 +1,7 @@
 views.TargetView = Backbone.View.extend({
   
   tagName: 'pre',  
-  class: 'target',
+  className: 'target',
 
   initialize: function(options) {
     this.domScape = $('<pre>').append( $(this.model.get('domScape')) );    

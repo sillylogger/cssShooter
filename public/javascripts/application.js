@@ -6,11 +6,11 @@ SampleData = {
     all: [{
       domScape: '\
 <p>Bystander</p>\n\
-<p>Bystander</p>\n\
+<p>Innocent Bystander</p>\n\
 <p>Bystander</p>\n\
 <p>\n\
   <span>Barrier</span>\n\
-  <span data-target="true">Target</span>\n\
+  <span data-target="true">Zombie (the target)</span>\n\
 </p>',
       solution: 'p span:last-of-type'
     }]
@@ -18,19 +18,27 @@ SampleData = {
 };
 
 Application = {
+  
+  nav: 'nav',
     
 	initialize: function(){
-    var target = new models.Target(SampleData.Target.all[0]);
-    var targetView = new views.TargetView({ model: target });
-    $('article pre').replaceWith(targetView.render().el);
-    
-    $('article form').submit(function(){
-      var result = targetView.shoot( $('input', this).val() );
-      
-      alert(result ? "Hole in One!" : "Keep tryin'");
-      
-      return false;
-    });
+	  var nav = $(this.nav);
+
+    var rangeView = new views.RangeView({ el: $('article') });
+	  
+	  _.each( SampleData.Target.all, function(target, index) {
+	    var link = $('<a href="#">').data('target_id', index).text('Level ' + index);
+	    nav.append(link);
+	  });
+	  
+	  $('nav a').bind('click', function(){
+	    var link = $(this);
+	    var targetData = SampleData.Target.all[ link.data('target_id') ];
+	    rangeView.model = new models.Target(targetData);
+	    rangeView.render();
+	    return false;
+	  });
+	  
 	}
 
 };

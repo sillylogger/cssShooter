@@ -3,6 +3,7 @@ require('/javascripts/underscore.js');
 require('/javascripts/backbone.js');
 require('/javascripts/application.js');
 require('/javascripts/models/target.js');
+require('/javascripts/views/range_view.js');
 require('/javascripts/views/target_view.js');
 
 template('application.html');
@@ -10,55 +11,44 @@ template('application.html');
 describe('Application', function(){
     
   describe('initialize', function(){
-    var mockTarget;
-    var mockTargetHtml = 'hit me';
+    var body, mockRangeView;
     
     beforeEach(function(){
-      mockTarget = jasmine.createSpy('mockTarget');
-      spyOn(models, 'Target').andReturn(mockTarget);
+      body = $('#test');
       
-      mockTargetView = {
-        render: function(){ return mockTargetHtml; },
-        shoot: jasmine.createSpy('shoot').andReturn(true)
-      };
-      spyOn(views, 'TargetView').andReturn(mockTargetView);
+      mockRangeView = jasmine.createSpyObj('mockRangeView', ['render']);
+      spyOn(views, 'RangeView').andReturn(mockRangeView);
       
+      Application.body = '#test';
       Application.initialize();
     });
 
-    it('creates a target', function(){
-      expect(models.Target).toHaveBeenCalled();
-
-      var options = models.Target.mostRecentCall.args[0];
-      expect(options).toEqual(SampleData.Target.all[0])
+    it('creates a RangeView', function(){
+      expect(views.RangeView).toHaveBeenCalled();
+      
+      var options = views.RangeView.mostRecentCall.args[0];
+      expect(options.el.selector).toEqual('article');
     });
 
-    it('passes that target to the view', function(){
-      expect(views.TargetView).toHaveBeenCalledWith({ model: mockTarget});
+    it('creates a link for each Target in the sample data', function(){
+      expect( $('a', body).size() ).toEqual( SampleData.Target.all.length )
+      expect( $('a', body).first().data('target_id') ).toEqual( 0 ) // the id is the index
+    });
+
+    it("sets the RangeView's model do that Target on click", function(){
+      expect(mockRangeView.model).toBeUndefined();
+      $('a', body).first().click();
+      expect(mockRangeView.model.attributes).toEqual( SampleData.Target.all[0]);
     });
     
-    context('form submit', function(){
-      var form, input;
-      
-      beforeEach(function(){
-        form = $('article form');
-        input = $('input', form);
-      });
-      
-      it('calls shoot on the view with the selected value', function(){
-        var cssFourSelector = '#css $four selector';
-        input.val(cssFourSelector);
-        form.submit();
-        expect(mockTargetView.shoot).toHaveBeenCalledWith(cssFourSelector);
-      });
-
-      it("it calls alert with shoot's results (true)", function(){
-        spyOn(window, 'alert');
-        form.submit();
-        expect(window.alert).toHaveBeenCalled();
-      });
+    it("calls render the RangeView's model do that Target on click", function(){
+      expect(mockRangeView.render).not.toHaveBeenCalled();
+      $('a', body).first().click();
+      expect(mockRangeView.render).toHaveBeenCalled();
     });
+    
   });
+  
 });
 
 
